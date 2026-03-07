@@ -1,0 +1,27 @@
+name: PR Checklist Comment
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  comment-checklist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add checklist as comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `
+### 🔍 PR Checklist
+
+- [ ] PR title is clear and descriptive
+- [ ] CI checks pass
+- [ ] Changelog updated if needed
+- [ ] Linked to relevant issue (if applicable)
+              `
+            })
