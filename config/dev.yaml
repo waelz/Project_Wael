@@ -1,0 +1,20 @@
+framework:
+  debug: true
+  log_level: DEBUG
+
+plugins:
+  - name: auth
+    enabled: true
+    options:
+      secret_key: "dev-secret-key"
+      token_expiry: 7200
+
+services:
+  database:
+    host: localhost
+    name: mydb_dev
+    pool_size: 2
+
+  api:
+    workers: 1
+    timeout: 60

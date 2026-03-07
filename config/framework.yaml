@@ -1,0 +1,40 @@
+framework:
+  name: MyFramework
+  version: "1.0.0"
+  debug: false
+  log_level: INFO
+
+plugins:
+  - name: auth
+    enabled: true
+    options:
+      secret_key: "changeme"
+      token_expiry: 3600
+      algorithm: HS256
+
+  - name: cache
+    enabled: true
+    options:
+      backend: memory
+      ttl: 300
+      max_size: 1000
+
+  - name: cors
+    enabled: false
+    options:
+      allowed_origins:
+        - "http://localhost:3000"
+      allow_credentials: true
+
+services:
+  database:
+    host: localhost
+    port: 5432
+    name: mydb
+    pool_size: 5
+
+  api:
+    host: 0.0.0.0
+    port: 8000
+    workers: 4
+    timeout: 30

@@ -1,0 +1,30 @@
+framework:
+  debug: false
+  log_level: WARNING
+
+plugins:
+  - name: cache
+    enabled: true
+    options:
+      backend: redis
+      ttl: 600
+      max_size: 10000
+
+  - name: cors
+    enabled: true
+    options:
+      allowed_origins:
+        - "https://myapp.com"
+      allow_credentials: true
+
+services:
+  database:
+    host: prod-db.internal
+    name: mydb_prod
+    pool_size: 20
+
+  api:
+    host: 0.0.0.0
+    port: 80
+    workers: 8
+    timeout: 15
